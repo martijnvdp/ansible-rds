@@ -1,9 +1,20 @@
 ---
 - name: Add Remote Desktop Feature
   win_feature:
-    name: Remote-Desktop-Services
+    name: 
+    - Remote-Desktop-Services
+    - RDS-RD-Server
+    include_management_tools: yes
     state: present
   register: rds_install
+
+- name: Reboot 
+  ansible.windows.win_reboot:
+  when: rds_install.reboot_required
+
+- name: Wait for system to become reachable
+  wait_for_connection:
+    timeout: 900
 
 - name: Add additional Features
   win_feature:
@@ -11,8 +22,9 @@
     - RSAT-Role-Tools
     - RSAT-AD-Tools
     - RSAT-ADDS-Tools
+    - RSAT-AD-PowerShell
+    - RSAT-DHCP
+    - RSAT-DNS-Server                                                  
+    - RSAT-File-Services
     state: present
 
-- name: Reboot 
-  ansible.windows.win_reboot:
-  when: rds_install.reboot_required
