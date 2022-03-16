@@ -1,0 +1,23 @@
+---
+- hosts: localhost
+  gather_facts: false
+  vars:
+    servers:
+    - server1
+    - server2
+  vars_files: 
+    group_vars/rds.yml
+  vars_prompt:
+    - name: "vcenter_username"
+      prompt: "Enter domain admin username without domain ( eg: adminuser )"
+      private: no
+    - name: "vcenter_password"
+      prompt: "Enter Password"
+  roles:
+    - deploy_vmware_guest
+
+- hosts: rdp_hosts
+  gather_facts: false
+  roles:
+    - add_software_rdp
+    

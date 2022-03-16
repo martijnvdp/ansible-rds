@@ -1,0 +1,19 @@
+---
+ansible_python_interpreter: /usr/bin/python3
+vcenter_hostname: vmware.sandbox.local
+domain: sandbox.local
+notes: Sandbox remote desktop server
+vm_folder: /rds
+vm_datastore: vsanDatastore
+vm_datacenter: VM Datacenter
+vm_template: Windows-2022-Template-Standard
+vm_customization_spec: Windows 2022
+vm_cluster: Cluster
+vm_cpucount: 4
+vm_disktype: thin
+vm_controller_type: lsilogicsas
+vm_disk1: 100
+vm_disk2: 10
+vm_memory: 16
+vm_network: VMNetwork
+vm_resource_pool: vmresourcepool
