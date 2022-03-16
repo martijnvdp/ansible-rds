@@ -3,6 +3,7 @@
   win_feature:
     name: Remote-Desktop-Services
     state: present
+  register: rds_install
 
 - name: Add additional Features
   win_feature:
@@ -11,3 +12,7 @@
     - RSAT-AD-Tools
     - RSAT-ADDS-Tools
     state: present
+
+- name: Reboot 
+  ansible.windows.win_reboot:
+  when: rds_install.reboot_required
