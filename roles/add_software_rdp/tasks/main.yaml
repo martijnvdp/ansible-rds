@@ -1,0 +1,13 @@
+---
+- name: Add Remote Desktop Feature
+  win_feature:
+    name: Remote-Desktop-Services
+    state: present
+
+- name: Add additional Features
+  win_feature:
+    name: 
+    - RSAT-Role-Tools
+    - RSAT-AD-Tools
+    - RSAT-ADDS-Tools
+    state: present
