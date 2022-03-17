@@ -18,6 +18,9 @@
 
 - hosts: rdp_hosts
   gather_facts: false
+  vars_files: 
+    group_vars/infra-sandbox.yml
   roles:
     - add_software_rdp
+    - move_ad_computer
     
