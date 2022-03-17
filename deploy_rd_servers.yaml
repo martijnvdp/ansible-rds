@@ -23,4 +23,5 @@
   roles:
     - add_software_rdp
     - move_ad_computer
+    - install_apps
     

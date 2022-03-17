@@ -1,0 +1,14 @@
+- name: install git
+  ansible.windows.win_powershell:
+    script: |
+      if (!((gp HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*).DisplayName -Match "git" )) {
+        Invoke-WebRequest 'https://github.com/git-for-windows/git/releases/download/v2.35.1.windows.2/Git-2.35.1.2-64-bit.exe' -OutFile c:\temp\gitsetup.exe
+        c:\temp\gitsetup.exe /silent 
+      }
+- name: install vs code
+  ansible.windows.win_powershell:
+    script: |
+      if (!((gp HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*).DisplayName -Match "Visual Studio Code" )) {
+        Invoke-WebRequest 'https://code.visualstudio.com/sha/download?build=stable&os=win32-x64' -OutFile c:\temp\VSCodeSetup.exe
+        c:\temp\VSCodeSetup.exe /VERYSILENT /NORESTART /MERGETASKS=!runcode 
+      }
