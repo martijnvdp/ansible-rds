@@ -3,6 +3,7 @@ ansible_python_interpreter: /usr/bin/python3
 vcenter_hostname: vmware.sandbox.local
 domain: sandbox.local
 notes: Sandbox remote desktop server
+software_share: '\\server\share\software'
 vm_ad_ou: "OU=rds,OU=servers,DC=sandbox,DC=local"
 vm_folder: /rds
 vm_datastore: vsanDatastore
