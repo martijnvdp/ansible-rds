@@ -6,9 +6,9 @@
     - -ExecutionPolicy
     - ByPass
 
-- name: Set timezone to 'GMT Standard Time' (GMT)
+- name: Set timezone to W. Europe Standard Time
   community.windows.win_timezone:
-    timezone: GMT Standard Time
+    timezone: W. Europe Standard Time
 
 - name: Reboot
   ansible.windows.win_reboot:
