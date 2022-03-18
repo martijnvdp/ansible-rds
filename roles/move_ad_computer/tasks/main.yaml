@@ -1,10 +1,15 @@
 - name: move computer to ou
   ansible.windows.win_powershell:
     script: |
-      Get-ADComputer $env:computername| Move-ADObject -TargetPath "{{ vm_ad_ou }}"
+      if ((get-adcomputer $env:computername).DistinguishedName -notlike "CN=$env:computername,{{ vm_ad_ou }}"){
+        Get-ADComputer $env:computername| Move-ADObject -TargetPath "{{ vm_ad_ou }}"
+      } else {
+        $Ansible.Changed = $false
+      }
     arguments:
     - -ExecutionPolicy
     - ByPass
+  register: move_ad
 
 - name: Set timezone to W. Europe Standard Time
   community.windows.win_timezone:
@@ -12,6 +17,7 @@
 
 - name: Reboot
   ansible.windows.win_reboot:
+  when: move_ad.changed
 
 - name: Wait for system to become reachable
   wait_for_connection:
